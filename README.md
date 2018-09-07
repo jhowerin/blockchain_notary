@@ -1,6 +1,11 @@
-# Blockchain Data
+# Private blockchain  
 
-Blockchain has the potential to change the way that the world approaches data. Develop Blockchain skills by understanding the data model behind Blockchain by developing your own simplified private blockchain.
+This program creates a private blockchain that includes SHA256 to hash each block and level to create a
+persistent database.<br>
+
+When the program is run, the chain and blocks are validated and then new blocks are added to the chain.
+For each block added, the block hash and previous block hash are printed to screen.<br>
+
 
 ## Getting Started
 
