@@ -32,13 +32,13 @@ npm install level --save
 2: Run simpleChain.js by entering> node simpleChain.js  
 
 ### Test using REPL
-To test code using Node REPL (Read-Evaluate-Print-Loop)
-1: Open a command prompt or shell terminal after install node.js.
-2: Enter a node session, also known as REPL (Read-Evaluate-Print-Loop).
+To test code using Node REPL (Read-Evaluate-Print-Loop)  
+1: Open a command prompt or shell terminal after install node.js.  
+2: Enter a node session, also known as REPL (Read-Evaluate-Print-Loop).  
 ```
 node
 ```
-3: Copy and paste your code into your node session
+3: Copy and paste your code into your node session  
 4: Instantiate blockchain with blockchain variable
 ```
 let blockchain = new Blockchain();
