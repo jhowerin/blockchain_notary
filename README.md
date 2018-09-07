@@ -27,7 +27,12 @@ npm install level --save
 
 ## Testing
 
-To test code:
+### Test by running program
+1: Move to directory with simpleChain.js  
+2: Run simpleChain.js by entering> node simpleChain.js  
+
+### Test using REPL
+To test code using Node REPL (Read-Evaluate-Print-Loop)
 1: Open a command prompt or shell terminal after install node.js.
 2: Enter a node session, also known as REPL (Read-Evaluate-Print-Loop).
 ```
