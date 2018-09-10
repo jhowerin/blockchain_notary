@@ -27,8 +27,10 @@ class Blockchain {
   constructor () {
     // Add the genesis block if this is a new block
     this.getBlockHeight().then((height) => {
-      if (height <= 0) this.addBlock(new Block('Genesis block')).then(() =>
-        console.log('First block in the chain - Genesis block\n\n'))
+      if (height==-1) {
+      this.addBlock(new Block('Genesis block')).then(() =>
+      console.log('First block in the chain - Genesis block\n\n'))
+    }
     })
   }
   // Add new block - adds it to the blockchain
@@ -36,22 +38,24 @@ class Blockchain {
     // Get the blockheight so we'll know where to add the block in the chain
     let currentBlockHeight = parseInt(await this.getBlockHeight())
     // new Block height is stored in the newBlock object
-    newBlock.height = currentBlockHeight + 1
+    newBlock.height = currentBlockHeight + 1;
     // UTC timestamp
     newBlock.time = new Date().getTime().toString().slice(0, -3)
     // previous block hash is stored in the newBlock object as the
     // previousBlockHash
     if (newBlock.height > 0) {
-      let previousBlock = await this.getBlock(currentBlockHeight)
-      newBlock.previousBlockHash = previousBlock.hash
+      let previousBlock = await this.getBlock(currentBlockHeight);
+      newBlock.previousBlockHash = previousBlock.hash;
     }
     // Block hash with SHA256 using newBlock and converting to a string
     newBlock.hash = SHA256(JSON.stringify(newBlock)).toString()
     console.log("New block being added")
+    console.log("Block height   : " + newBlock.height);
+    console.log("Block body     : " + newBlock.body);
     console.log("New Block Hash : " + newBlock.hash);
     console.log("Pre Block Hash : " + newBlock.previousBlockHash);
     // Adding block object to levelDB instead of a non-persistent chain
-    await this.addLevelDBData(newBlock.height, JSON.stringify(newBlock))
+    await this.addLevelDBData(newBlock.height, JSON.stringify(newBlock));
   }
   // Get block height from the LevelDB persistent data store
   async getBlockHeight () {
@@ -66,13 +70,13 @@ class Blockchain {
   // validate block
   async validateBlock (blockHeight) {
     // get block object
-    let block = await this.getBlock(blockHeight)
+    let block = await this.getBlock(blockHeight);
     // get block hash
-    let blockHash = block.hash
+    let blockHash = block.hash;
     // remove block hash to test block integrity
-    block.hash = ''
+    block.hash = '';
     // generate block hash
-    let validBlockHash = SHA256(JSON.stringify(block)).toString()
+    let validBlockHash = SHA256(JSON.stringify(block)).toString();
     // Compare
     if (blockHash === validBlockHash) {
       return true
@@ -83,15 +87,29 @@ class Blockchain {
   }
   // Validate blockchain
   async validateChain () {
-    let errorLog = []
-    let blockChainHeight = await this.getBlockHeight()
-
-    for (let i = 0; i < blockChainHeight; i++) {
+    let errorLog = [];
+    let previousHash = '';
+    // let blockChainHeight = await this.getBlockHeight()
+    let blockChainHeight = await this.getHeightLevelDB();
+    console.log("The Validation Process");
+    console.log("======================");
+    console.log("The current block hash will be compared to the previous block hash");
+    console.log("They should be the same");
+    console.log("======================");
+    console.log("The block height is " + blockChainHeight);
+    let i;
+    for (i = 0; i <= blockChainHeight-1; i++) {
       // validate a single block
       if (!this.validateBlock(i)) errorLog.push(i)
       // compare blocks hash link
-      let blockHash = this.getBlock(i).hash
-      let previousHash = this.getBlock(i+1).previousBlockHash
+      console.log(`Validating the chain between block ${i} and block ${i+1}`);
+      let block = await this.getBlock(i);
+      let previousBlock = await this.getBlock(i+1);
+      console.log("Block " + i + " hash is: " + block.hash);
+      console.log("Block " + (i+1) + " prevsious hash is: " + previousBlock.previousBlockHash);
+      console.log();
+      let blockHash = this.getBlock(i).hash;
+      let previousHash = this.getBlock(i+1).previousBlockHash;
       if (blockHash !== previousHash) {
         errorLog.push(i)
       }
@@ -103,6 +121,7 @@ class Blockchain {
     } else {
       console.log('No errors detected')
     }
+    console.log("Validated " + blockChainHeight + " blocks");
     console.log('\n');
   }
 
@@ -110,9 +129,9 @@ class Blockchain {
   // read the blockchain and increment the height for each block read.
    getHeightLevelDB () {
     return new Promise((resolve, reject) => {
-      let height = -1
+      let height = -1;
       db.createReadStream().on('data', (data) => {
-        height++
+        height++;
       }).on('error', (err) => {
         console.log('Unable to read data stream!', err)
         reject(err)
@@ -160,11 +179,18 @@ let blockchain = new Blockchain();
 // add 10 blocks to the blockchain
 (function theLoop (i) {
   setTimeout(function () {
-    blockchain.addBlock(new Block(`Block # ${i}`))
+    count++;
+    //blockchain.addBlock(new Block(`Block # ${i}`))
+    blockchain.addBlock(new Block(`Block # ${count} of the current loop`))
     if (--i) theLoop(i);
   }, 100);
 })(10);
+// counter used in theLoop
+let count = 0;
+let globalHeight;
 // validate blockchain
-console.log("\nValidating Existing Blockchain");
-console.log("=====================");
-blockchain.validateChain()
+setTimeout(function () {
+  blockchain.validateChain();
+  console.log("\nValidating Existing Blockchain");
+  console.log("=====================");
+},5000);
