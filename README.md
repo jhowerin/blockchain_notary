@@ -6,6 +6,8 @@ persistent database.<br>
 When the program is run, the chain and blocks are validated and then new blocks are added to the chain.
 For each block added, the block hash and previous block hash are printed to screen.<br>
 
+The class Blockchain constructor creates the genesis block. The addBlock function will get the current chain height and then add a new block to the chain and console log messages will print to screen the hash information. Validation functions include validateBlock and validateChain - console log messages will print to screen showing block hash and previous hash information.
+
 
 ## Getting Started
 
