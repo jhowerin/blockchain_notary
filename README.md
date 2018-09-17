@@ -12,10 +12,10 @@ The Web API calls include:<br>
 1. Call to GET all blocks - use "localhost:8000/blocks"<br>
 1. Call to GET a specific block - use "localhost:8000/block/:id", where id is the number of the block to GET<br>
 1. Call to POST a new block - use "localhost:8000/block" and the POST details include:<br>
-  * Use application/json as the format type and enter the block in json format <br>
-      {
-        "block": "the body contents of whatever you want"
-      }
+  *   Use application/json as the format type and enter the block in json format <br>
+        {
+          "block": "the body contents of whatever you want"
+        }
 
 ## Framework  
 
@@ -57,5 +57,5 @@ npm install body-parser --save
 ### Test by running program
 1: Move to directory with simpleChain.js  
 2: Run simpleChain.js by entering> "node simpleChain.js"<br>
-3: 10 blocks are automatically created each time simpleChain is run.
+3: 10 blocks are automatically created each time simpleChain is run.  
 4: The blocks can be tested with the API calls defined above
