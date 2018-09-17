@@ -67,24 +67,12 @@ app.get('/block/:id', async (req, res) => {
   }
 })
 
-/*
-app.post('/block/',function(req,res){
-	var block=req.body.block;
-
-	if(block){
-		theBlock.addBlock(new Block(block));
-		res.status(200).send(block);
-	} else {
-		res.status(401).send("Cannot add empty block\n");
-	}
-});
-*/
 app.post('/block/', async(req, res) => {
   let newBlock = req.body.block;
   //let newBlock = await theBlock.addBlock(req.body);
   if(newBlock){
-  	const response = theBlock.addBlock(new Block(newBlock));
-  	res.send(response);
+  	theBlock.addBlock(new Block(newBlock));
+  	res.send(newBlock);
   } else {
   res.status(400).json({
     "status": 400,
