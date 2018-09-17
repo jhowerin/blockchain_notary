@@ -127,7 +127,7 @@ class Blockchain {
 
   // Get the block height level from the LevelDB
   // read the blockchain and increment the height for each block read.
-   getHeightLevelDB () {
+  getHeightLevelDB () {
     return new Promise((resolve, reject) => {
       let height = -1;
       db.createReadStream().on('data', (data) => {
@@ -135,7 +135,7 @@ class Blockchain {
       }).on('error', (err) => {
         console.log('Unable to read data stream!', err)
         reject(err)
-      }).on('close', () => {
+      }).on('close', function() {
         resolve(height)
       })
     })
@@ -194,3 +194,9 @@ setTimeout(function () {
   console.log("\nValidating Existing Blockchain");
   console.log("=====================");
 },5000);
+
+
+module.exports = {
+  Block,
+  Blockchain
+};
