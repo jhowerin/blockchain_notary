@@ -69,10 +69,13 @@ app.get('/block/:id', async (req, res) => {
 
 app.post('/block/', async(req, res) => {
   let newBlock = req.body.block;
-  //let newBlock = await theBlock.addBlock(req.body);
+  //let newBlock = await theBlock.addBlock(req.body.block);
   if(newBlock){
-  	theBlock.addBlock(new Block(newBlock));
-  	res.send(newBlock);
+  	await theBlock.addBlock(new Block(newBlock));
+    const height = await theBlock.getBlockHeight();
+    //console.log(`the height is ${height}`);
+    const response = await theBlock.getBlock(height);
+  	res.send(response);
   } else {
   res.status(400).json({
     "status": 400,
