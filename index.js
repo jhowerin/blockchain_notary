@@ -1,3 +1,5 @@
+
+
 // Using express.js node.js web frameworkd
 const express = require('express')
 const app = express()
@@ -68,7 +70,7 @@ app.get('/block/:id', async (req, res) => {
 })
 
 app.post('/block/', async(req, res) => {
-  let newBlock = req.body.block;
+  let newBlock = req.body.body;
   //let newBlock = await theBlock.addBlock(req.body.block);
   if(newBlock){
   	await theBlock.addBlock(new Block(newBlock));
