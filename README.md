@@ -1,25 +1,53 @@
-# Web API with simpleChain blockchain  
+# Private Blockchain Notary Service for a Star Registry
 
-This program creates 4 custom API endpoints for the simpleChain blockchain.<br>
+This program creates a Star Registry service that allows users to claim ownership of their favorite star in the night sky.<br>
 
-The simpleChain blockchain creates a private blockchain that includes SHA256 to hash each block and level to create a
-persistent database.<br>
+There are 3 main components to this blockchain asset star registry
+1. Validate a wallet address to be able to work with the blockchain  
+2. Allow stars to be registered to the blockchain   
+3. View the stars on the blockchain  
 
-The class Blockchain constructor creates the genesis block. The addBlock function will get the current chain height and then add a new block to the chain and console log messages will print to screen the hash information. Validation functions include validateBlock and validateChain - console log messages will print to screen showing block hash and previous hash information. By default, when the program runs, 10 blocks are automatically created.<br>
+## The Wallet Validation Routine Process:<br>
+1. Issue POST message to http://localhost:8000/requestValidation
+* The message contents includes the user wallet address as follows:
+```
+{
+	"address": "19TZkF3mmpsGieFx9sDyPWKGYW1P4ta6no"
+}
+```
+The returned message must be signed and verified by your wallet. This will be used in the next step in the signature field.<br>
 
-The Web API calls include:<br>
+2. Issue POST message to http://localhost:8000/message-signature/validate
+* The message contents includes the user wallet address and the signature of the message as follows:
+```
+{
+	"address": "19TZkF3mmpsGieFx9sDyPWKGYW1P4ta6no",
+  "signature": "H4gSPsOzAs8T4TmvGXPJQB4qNduGAFbTgXglYfgsRfgwYbHh1kwG0ESzsnKVSSkjal3HsbRb0wZHWoj8fRB40gU="
+}
+```
+<b>The Wallet Validation Routine must be completed within 300 seconds</b><br>
+
+## Register a star on the blockchain:<br>
+1. Issue POST message to http://localhost:8000/block
+* The message contents includes the following:
+```
+{
+	"address": "19TZkF3mmpsGieFx9sDyPWKGYW1P4ta6no",
+  	"star" : {
+  		"ra": "dd",
+  		"dec": "-26 29 24.9",
+  		"story": "October 23rd - posting a second star"
+  	}
+}
+```
+If the wallet address has not been validated, the star registration will fail.
+
+## View the stars on the blockchain<br>
+The Star Registry Service API calls include:<br>
 1. Call to Root to display Welcome Message - use "localhost:8000/"<br>
-1. Call to GET all blocks - use "localhost:8000/blocks"<br>
-1. Call to GET a specific block - use "localhost:8000/block/:id", where id is the number of the block to GET<br>
-1. Call to POST a new block - use "localhost:8000/block" and the POST details include:<br>
-  *   Use application/json as the format type and enter the block in json format <br>
-        {
-          "block": "the body contents of whatever you want"
-        }
-
-## Framework  
-
-The express framework is used.  
+2. Call to GET stars by a specific wallet - use localhost:8000/stars/address:[wallet address]
+3. Call to GET a star by a specific block hash - use localhost:8000/stars/hash:[hash value]
+4. Call to GET a star by the block height - use localhost:8000/block/[block#]
 
 ## Getting Started
 
@@ -35,27 +63,9 @@ Installing Node and NPM is pretty straightforward using the installer package av
 ```
 npm init
 ```
-- Install crypto-js with --save flag to save dependency to our package.json file
-```
-npm install crypto-js --save
-```
-- Install level with --save flag
-```
-npm install level --save
-```
-- Install express with --save flag
-```
-npm install express --save
-```
-- Install body-parser with --save flag
-```
-npm install body-parser --save
-```
 
-## Testing
-
-### Test by running program
-1: Move to directory with simpleChain.js  
-2: Run simpleChain.js by entering> "node simpleChain.js"<br>
-3: 10 blocks are automatically created each time simpleChain is run.  
-4: The blocks can be tested with the API calls defined above
+## Run the program
+1. Move to root directory (includes the index.js file)<br>
+2. Run index.js by entering> "node index.js"<br>
+3. Validate wallet address if you want to be able to register stars
+4. The stars can be viewed without wallet registration

@@ -51,7 +51,8 @@ class Blockchain {
     newBlock.hash = SHA256(JSON.stringify(newBlock)).toString()
     console.log("New block being added")
     console.log("Block height   : " + newBlock.height);
-    console.log("Block body     : " + newBlock.body);
+    console.log("Block body address     : " + newBlock.body.address);
+    console.log("Block body star :" + newBlock.body.star)
     console.log("New Block Hash : " + newBlock.hash);
     console.log("Pre Block Hash : " + newBlock.previousBlockHash);
     // Adding block object to levelDB instead of a non-persistent chain
@@ -172,28 +173,6 @@ class Blockchain {
     })
   }
 }
-
-// Simple blockchain testing section
-// create a new blockchain object
-let blockchain = new Blockchain();
-// add 10 blocks to the blockchain
-(function theLoop (i) {
-  setTimeout(function () {
-    count++;
-    //blockchain.addBlock(new Block(`Block # ${i}`))
-    blockchain.addBlock(new Block(`Block # ${count} of the current loop`))
-    if (--i) theLoop(i);
-  }, 100);
-})(10);
-// counter used in theLoop
-let count = 0;
-let globalHeight;
-// validate blockchain
-setTimeout(function () {
-  blockchain.validateChain();
-  console.log("\nValidating Existing Blockchain");
-  console.log("=====================");
-},5000);
 
 
 module.exports = {
