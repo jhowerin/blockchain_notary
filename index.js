@@ -273,4 +273,4 @@ app.get('/stars/hash::hash', async (req, res) => {
 // defining the port number to listen on
 const port = 8000
 // Server listing on port <port>
-app.listen(port, () => console.log(`Blockchain Star Notary service listening on port ${port} !`))
+app.listen(process.env.PORT || port, () => console.log(`Blockchain Star Notary service listening on port ${port} !`))
