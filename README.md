@@ -1,4 +1,6 @@
 # Private Blockchain Notary Service for a Star Registry
+## See it live on Heroku [here](https://blockchain-star-registry.herokuapp.com/)  
+### URL: https://blockchain-star-registry.herokuapp.com/  
 
 This program creates a Star Registry service that allows users to claim ownership of their favorite star in the night sky.<br>
 
