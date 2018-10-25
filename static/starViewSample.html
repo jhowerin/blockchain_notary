@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>View Stars</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/grayscale.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Header -->
+    <header class="masthead">
+      <div class="container d-flex h-100 align-items-center">
+        <div class="mx-auto text-center">
+          <h1 class="mx-auto my-0 text-uppercase">View Stars</h1>
+          <h2 class="text-white-50 mx-auto mt-2 mb-5">Anyone can view the stars on the blockchain - wallet address validation not required</h2>
+          <a href="#welcome" class="btn btn-primary js-scroll-trigger">View the STars</a>
+          <a href="/index.html" class="btn btn-primary">Back to Main Page</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Find Star by Wallet Address Section -->
+    <section id="welcome" class="about-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h1 class="text-white mb-4">Find Star by Wallet Address</h1>
+              <h2><div class="card-header text-white mb-4">Submit wallet address</div></h2>
+              <div class="card-block">
+                <form>
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="lookup-address" aria-describedby="lookup-addressHelp" placeholder="Enter address">
+                    <small id="lookup-addressHelp" class="form-text text-muted">Enter the address to lookup registered stars.</small>
+                  </div>
+                  <button id="lookupAddressButton" target="_blank" type="button" class="btn btn-primary">Lookup Stars</button>
+                </form>
+                </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="container-fluid">
+          <textarea rows="4" cols="50" id="starsByAddressResults">
+          </textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- Find Star by Hash string Section -->
+    <section id="welcome" class="about-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h1 class="text-white mb-4">Find Star by Hash</h1>
+              <h2><div class="card-header text-white mb-4">Submit hash string</div></h2>
+              <div class="card-block">
+                <form>
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="lookup-hash" aria-describedby="lookup-hashHelp" placeholder="Enter hash">
+                    <small id="lookup-hashHelp" class="form-text text-muted">Enter the hash to lookup a registered star.</small>
+                  </div>
+                  <button id="lookupHashButton" target="_blank" type="button" class="btn btn-primary">Lookup Star</button>
+                </form>
+                </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="container-fluid">
+          <textarea rows="4" cols="50" id="starByHashResults">
+          </textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- Find Star by Block Height Section -->
+    <section id="welcome" class="about-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h1 class="text-white mb-4">Find Star by Block Height</h1>
+              <h2><div class="card-header text-white mb-4">Submit block #</div></h2>
+              <div class="card-block">
+                <form>
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="lookup-block" aria-describedby="lookup-blockHelp" placeholder="Enter height">
+                    <small id="lookup-blockHelp" class="form-text text-muted">Enter the blockheight to lookup a registered star.</small>
+                  </div>
+                  <button id="lookupBlockButton" target="_blank" type="button" class="btn btn-primary">Lookup Star</button>
+                </form>
+                </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="container-fluid">
+          <textarea rows="4" cols="50" id="starByBlockResults">
+          </textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- Find All Stars Section -->
+    <section id="welcome" class="about-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h1 class="text-white mb-4">Find All Stars</h1>
+              <h2><div class="card-header text-white mb-4">Just hit enter</div></h2>
+              <div class="card-block">
+                <form>
+                  <div class="form-group">
+
+                  </div>
+                  <button id="lookupAllBlocksButton" target="_blank" type="button" class="btn btn-primary">Lookup All Stars</button>
+                </form>
+                </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="container-fluid">
+          <textarea rows="4" cols="50" id="starAllBlocksResults">
+          </textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section bg-black">
+      <div class="container">
+        <div class="social d-flex justify-content-center">
+          <a href="https://github.com/jhowerin/blockchain_notary" target="_blank" class="mx-2">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black  text-center text-white-50">
+      <div class="container">
+        Copyright &copy; Jake Howering 2018
+      </div>
+    </footer>
+
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="console.js"></script>
+    <script src="js/grayscale.min.js"></script>
+
+  </body>
+
+</html>

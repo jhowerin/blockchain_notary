@@ -9,18 +9,22 @@ $('#requestValidationButton').click(function() {
     data: JSON.stringify(block),
     success: function(data) {
       console.log(data);
-      $('#requestValidationResults').html(JSON.stringify(data));
+      $('#requestValidationResults').html(JSON.stringify(data, null, 1));
+      $('#messageToSign').html(JSON.stringify(data.message, null, 1));
+      $('#timeLeft').html(JSON.stringify(data.validationWindow, null,1));
       $('#sign-message').val(data.message);
       $('#validate-address').val(data.address);
       $('#validate-signature').val("");
       $('#star-address').val(address);
       $('#lookup-address').val(address);
+      countdown();
     },
     error: function(data) {
       $('#requestValidationResults').html('<p style=\"color: red\">Unable to start validation workflow, see console for details</p>');
       console.log(data.responseText);
     }
   });
+
 });
 
 $('#signButton').click(function() {
@@ -61,7 +65,8 @@ $('#validateButton').click(function() {
     data: JSON.stringify(block),
     success: function(data) {
       console.log(data);
-      $('#validateResults').html(JSON.stringify(data));
+      $('#validateResults').html(JSON.stringify(data,null,1));
+      $('#signatureStatus').html(JSON.stringify(data.registerStar, null, 1));
     },
     error: function(data) {
       console.log(data.responseText);
@@ -130,7 +135,7 @@ $('#starButton').click(function() {
     data: JSON.stringify(block),
     success: function(data) {
       console.log(data);
-      $('#submitResults').html(JSON.stringify(data));
+      $('#submitResults').html(JSON.stringify(data, null, 1));
     },
     error: function(data) {
       console.log(data.responseText);
@@ -148,7 +153,7 @@ $('#lookupAddressButton').click(function() {
     contentType: "application/json; charset=utf-8",
     success: function(data) {
       console.log(data);
-      $('#starsByAddressResults').html(JSON.stringify(data));
+      $('#starsByAddressResults').html(JSON.stringify(data, null,1));
     },
     error: function(data) {
       console.log(data.responseText);
@@ -166,7 +171,7 @@ $('#lookupHashButton').click(function() {
     contentType: "application/json; charset=utf-8",
     success: function(data) {
       console.log(data);
-      $('#starByHashResults').html(JSON.stringify(data));
+      $('#starByHashResults').html(JSON.stringify(data, null, 1));
     },
     error: function(data) {
       console.log(data.responseText);
@@ -184,7 +189,7 @@ $('#lookupBlockButton').click(function() {
     contentType: "application/json; charset=utf-8",
     success: function(data) {
       console.log(data);
-      $('#starByBlockResults').html(JSON.stringify(data));
+      $('#starByBlockResults').html(JSON.stringify(data, null,1));
     },
     error: function(data) {
       console.log(data.responseText);
@@ -200,7 +205,7 @@ $('#lookupAllBlocksButton').click(function() {
     contentType: "application/json; charset=utf-8",
     success: function(data) {
       console.log(data);
-      $('#starAllBlocksResults').html(JSON.stringify(data));
+      $('#starAllBlocksResults').html(JSON.stringify(data, null,1));
     },
     error: function(data) {
       console.log(data.responseText);
@@ -208,3 +213,21 @@ $('#lookupAllBlocksButton').click(function() {
     }
   });
 });
+
+//Countdown Timer
+var timeLeft = 300;
+var elem = document.getElementById('countdownTimer');
+var timerId = setInterval(countdown, 1000);
+
+function countdown() {
+    if (timeLeft == -1) {
+        clearTimeout(timerId);
+        endTimer();
+    } else {
+        elem.innerHTML = timeLeft + ' seconds remaining';
+        timeLeft--;
+    }
+}
+
+function endTimer() {
+}
